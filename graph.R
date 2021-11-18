@@ -1,38 +1,34 @@
-library(ipumsr)
-library("haven")
+# install.packages("gganimate")
+library(gganimate)
+library(ggplot2)
 library(dplyr)
-library(tidyverse)
+library(gapminder)
+library(ggthemes)
 
-ddi <- read_ipums_ddi("nhis_00002.xml")
-data <- read_ipums_micro(ddi)
+# Graph 1: Transitioning through time
+gapminder
 
-data$INCFAM07ON <- haven::as_factor(data$DGRDG)
-data$HRSLEEP <- haven::as_factor(data$SALARY)
+graph1 = gapminder %>%
+  ggplot(aes(x=gdpPercap, y=lifeExp, color=continent, size=pop)) +
+  geom_point(alpha = 0.7, stroke = 0) +
+  theme_fivethirtyeight() +
+  scale_size(range=c(2,12), guide="none") +
+  scale_x_log10() +
+  labs(title = "Life Expectancy vs GDP Per Capita by Country",
+       x = "Income per person (GDP / capita)",
+       y = "Life expectancy (years)",
+       color = "Continent",
+       caption = "Source: Gapminder") +
+  theme(axis.title = element_text(),
+        text = element_text(family = "Rubik"),
+        legend.text=element_text(size=10)) +
+  scale_color_brewer(palette = "Set2")
 
-data %>% mutate(INCFAM07ON = case_when(INCFAM07ON == 10 ~ "$0-$49,999",
-                                       INCFAM07ON == 11 ~ "$0-$34,999",
-                                       INCFAM07ON == 12 ~ "$35,000-$49,999",
-                                       INCFAM07ON == 20 ~ "$50,000+",
-                                       INCFAM07ON == 21 ~ "$50,000-$99,999",
-                                       INCFAM07ON == 22 ~ "$50,000-$74,999",
-                                       INCFAM07ON == 23 ~ "$75,000-$99,999",
-                                       INCFAM07ON == 24 ~ "$100,000+",
-                                       TRUE ~ as.character(INCFAM07ON)))
+graph1.animation = graph1 +
+  transition_time(year) +
+  labs(subtitle = "Year: {frame_time}") +
+  shadow_wake(wake_length = 0.1)
 
-view(data)
-
-data %>%
-  filter(HRSLEEP > 0) %>%
-  filter(HRSLEEP < 25) %>%
-  filter(INCFAM07ON < 96) %>%
-  mutate(INCFAM07ON = case_when(INCFAM07ON == 10 ~ "$0-$49,999",
-                                INCFAM07ON == 11 ~ "$0-$34,999",
-                                INCFAM07ON == 12 ~ "$35,000-$49,999",
-                                INCFAM07ON == 20 ~ "$50,000+",
-                                INCFAM07ON == 21 ~ "$50,000-$99,999",
-                                INCFAM07ON == 22 ~ "$50,000-$74,999",
-                                INCFAM07ON == 23 ~ "$75,000-$99,999",
-                                INCFAM07ON == 24 ~ "$100,000+",
-                                TRUE ~ as.character(INCFAM07ON))) %>%
-  ggplot(data, mapping = aes(INCFAM07ON, HRSLEEP)) + 
-  geom_point()
+animate(graph1.animation, height = 500, width = 800, fps = 30, duration = 10,
+        end_pause = 60, res = 100)
+anim_save("gapminder graph.gif")

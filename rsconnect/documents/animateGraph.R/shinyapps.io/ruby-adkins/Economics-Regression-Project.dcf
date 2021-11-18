@@ -1,0 +1,14 @@
+name: Economics-Regression-Project
+title: Economics-Regression-Project
+username:
+account: ruby-adkins
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 5156776
+bundleId: 5267106
+url: https://ruby-adkins.shinyapps.io/Economics-Regression-Project/
+when: 1637253658.53607
+lastSyncTime: 1637253658.53607
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .RData|graph.R|highered_00002.dat.gz|highered_00002.xml|nhis_00002.dat.gz|nhis_00002.xml

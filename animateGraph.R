@@ -6,9 +6,9 @@ library(rsconnect)
 library(ggpmisc)
 
 ui <- fluidPage(
-  titlePanel(title=h4("Life Expectancy versus GDP per Capita", align="center")),
+  titlePanel(title=h1("Life Expectancy versus GDP per Capita", align="center")),
   sidebarPanel( 
-    sliderInput("yearValue", "Year:",min = 1952, max = 2002,step=5,value=1952, sep = "", animate=TRUE)),
+    sliderInput("yearValue", "Year:",min = 1952, max = 2007,step=5,value=1952, sep = "", animate=TRUE)),
   mainPanel(plotOutput("plot")))
 
 server <- function(input,output){

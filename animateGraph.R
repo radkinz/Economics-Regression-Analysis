@@ -30,7 +30,7 @@ server <- function(input,output){
       facet_wrap(~continent) +
       xlab("GDP per Capita") +
       ylab("Life Expectancy") 
-    }, height = 400,width = 600)
+    })
   }
 
 shinyApp(ui, server)

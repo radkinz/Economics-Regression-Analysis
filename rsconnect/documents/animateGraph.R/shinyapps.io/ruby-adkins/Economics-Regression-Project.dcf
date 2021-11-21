@@ -5,10 +5,10 @@ account: ruby-adkins
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 5156776
-bundleId: 5268914
+bundleId: 5275409
 url: https://ruby-adkins.shinyapps.io/Economics-Regression-Project/
-when: 1637290798.20377
-lastSyncTime: 1637290798.20377
+when: 1637466946.88031
+lastSyncTime: 1637466946.88031
 asMultiple: FALSE
 asStatic: FALSE
 ignoredFiles: .RData|graph.R

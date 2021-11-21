@@ -9,3 +9,6 @@ I utilized the gapminder library to access a large dataset of countries' GDP and
 
 ## UI
 
+![Screenshot 2021-11-20 at 23-07-45  h1 align= center Life Expectancy versus GDP per Capita h1 ](https://user-images.githubusercontent.com/81705278/142749197-827ef1de-312c-48e7-a2e6-ac50abfc15e2.png)
+
+The slider allows the user to see the new data for each year, and there is also a button on the slider to animate through all years.
